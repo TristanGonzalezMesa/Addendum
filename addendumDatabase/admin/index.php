@@ -8,7 +8,7 @@ $gebruiker = $_SESSION['Email'];
     
 <?php
 try{
-    $sql = "SELECT * FROM gebruikers WHERE email='$gebruiker'";   
+    $sql = "SELECT * FROM klanten WHERE email='$gebruiker'";   
     $result = $pdo->query($sql);
     if($result->rowCount() > 0){
         while($row = $result->fetch()){

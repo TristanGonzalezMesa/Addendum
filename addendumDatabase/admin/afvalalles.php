@@ -11,7 +11,7 @@ $gebruiker = $_SESSION['Email'];
 
     <?php
 try{
-    $sql = "SELECT * FROM afvalsoort";   
+    $sql = "SELECT * FROM afval";   
     $result = $pdo->query($sql);
     if($result->rowCount() > 0){
         echo "<h1> Beschikbaar Afval: </h1>";
@@ -22,7 +22,7 @@ try{
             <div style='border-style: solid;'>";         
             echo "<br>"; 
             echo "Soort afval ";
-            echo $row['afvalsoort'];
+            echo $row['afvalnaam'];
             echo "<br>";
             echo "Op te halen van: ";
             echo $row['datumhalenvan'];
@@ -42,7 +42,7 @@ try{
             }
             echo "<br>";
 
-         echo "<a class='' href='./ophalen.php?id=". $row['id']. "  '>Ophalen </a> "; 
+         echo "<a class='' href='../ophalen.php?id=". $row['afvalnummer']. "  '>Ophalen </a> "; 
                      echo  "</p>
                      </div>
                      </div>

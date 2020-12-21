@@ -2,7 +2,7 @@
 <?php
 include ('database.php'); 
 try{
-    $sql = "SELECT * FROM afspraak WHERE opgehaald='0'";   
+    $sql = "SELECT * FROM afval WHERE opgehaald='0'";   
     $result = $pdo->query($sql);
     if($result->rowCount() > 0){
         echo "<h1> Beschikbaar Afval: </h1>";
@@ -13,7 +13,10 @@ try{
             <div style='border-style: solid;'>";         
             echo "<br>"; 
             echo "Soort afval ";
-            echo $row['afvalsoort'];
+            echo $row['afvalnaam'];
+            echo "<br>";
+            echo "Omschrijving ";
+            echo $row['afvalomschrijving'];
             echo "<br>";
             echo "Op te halen van: ";
             echo $row['datumhalenvan'];
@@ -21,11 +24,8 @@ try{
             echo "Op te halen tot: ";
             echo $row['datumhalentot'];
             echo "<br>";
-            echo "Geplaatst door: ";   
-            echo $row['geplaatstdoor'];
-            echo "<br>";
 
-         echo "<a class='' href='./ophalen.php?id=". $row['id']. "  '>Ophalen </a> "; 
+         echo "<a class='' href='./ophalen.php?id=". $row['afvalnummer']. "  '>Ophalen </a> "; 
                      echo  "</p>
                      </div>
                      </div>

@@ -38,7 +38,7 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname",$username, $password);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
  
-$sql = "INSERT INTO gebruikers (voornaam, achternaam, straat, postcode, woonplaats, email, wachtwoord, tussenvoegsel, Geslacht, huisnummer)
+$sql = "INSERT INTO klanten (voornaam, achternaam, straat, postcode, woonplaats, email, wachtwoord, tussenvoegsel, Geslacht, huisnummer)
 VALUES ('$voornaam', '$achternaam', '$straat', '$postcode', '$woonplaats', '$email', '$wachtwoord', '$tussenvoegsel', '$geslacht', '$huisnummer')";
 
  try{

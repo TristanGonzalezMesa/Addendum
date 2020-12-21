@@ -29,7 +29,7 @@ $Password = $_POST['Password'];
   if(empty($Email) || empty($Password)) {
   $message = 'All field are required';
   } else {
-  $query = $conn->prepare("SELECT * FROM gebruikers WHERE email = '$Email' AND wachtwoord = '$Password' ");
+  $query = $conn->prepare("SELECT * FROM klanten WHERE email = '$Email' AND wachtwoord = '$Password' ");
   $query->execute(array($Email,$Password));
   $row = $query->fetch(PDO::FETCH_BOTH);
 

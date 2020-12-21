@@ -1,3 +1,13 @@
+<script src="js/loginregister.js"></script>
+
+<?php
+session_start();
+include ('database.php'); 
+$gebruiker = $_SESSION['Email'];
+?>
+    <?php if(isset($_SESSION['rol'])){if ($_SESSION['rol'] > 9) {  header('Location: ./index.php');}}?>
+    <?php if(isset($_SESSION['Email']) == "Email"){echo "";}else{header('Location: ./index.php');}?>
+
 <html>
 <head>
 <link rel="stylesheet" href="style.css" type="text/css" media="all" />
@@ -39,6 +49,28 @@
 </body>
 </html>
 
+
+<?php
+include ('database.php'); 
+try{
+    $sql = "SELECT * FROM klanten WHERE email='$gebruiker'";   
+    $result = $pdo->query($sql);
+    if($result->rowCount() > 0){
+        while($row = $result->fetch()){
+
+            $klantid = $row['klantid'];
+          }
+          
+          // Free result set
+          unset($result);
+      } else{
+          echo 'Ik kan de klant niet vinden!';
+      }
+  } catch(PDOException $e){
+      die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+  }
+?>
+
 <?php 
 include ('database.php'); 
   //ingevoerd
@@ -51,7 +83,7 @@ $Phone = $con->real_escape_string($_POST['contact']);
 $comments = $con->real_escape_string($_POST['text']);
 $Date = $_POST['date'];
   //query naar database
-$sql="INSERT INTO contactformulier (name, email, phone, comments, Datum) VALUES ('".$Name."','".$Email."', '".$Phone."', '".$comments."', '".$Date."')";
+$sql="INSERT INTO contactformulier (name, email, phone, comments, Datum, klantid) VALUES ('".$Name."','".$Email."', '".$Phone."', '".$comments."', '".$Date."', '".$klantid."')";
   //error
 if(!$result = $con->query($sql)){
 die('Error occured [' . $conn->error . ']');

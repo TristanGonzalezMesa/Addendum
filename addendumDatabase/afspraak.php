@@ -31,37 +31,42 @@ try{
 
 
 try{
-    $sql = "SELECT * FROM afval WHERE afvalnummer=$id2";   
+    $sql = "SELECT * FROM klantafspraakregel WHERE klantid=$klantid";   
     $result = $pdo->query($sql);
     if($result->rowCount() > 0){
         while($row = $result->fetch()){
+            $afvalnummer = $row['afvalnummer'];
+            $datumhalen = $row['datum'];
+            $tijdhalen = $row['tijd'];
 
-            $van = $row['datumhalenvan'];
-            $tot = $row['datumhalentot'];
-            echo "<div class='col-xs-6 col-sm-2 mb-20'>
-            <div style='border-style: solid;'>";         
-            echo "<br>"; 
-            echo "Soort afval ";
-            echo $row['afvalnaam'];
-            $afvalsoort1 = $row['afvalnaam'];
-            echo "<br>";
-            echo "Op te halen van: ";
-            echo $row['datumhalenvan'];
-            echo "<br>";
-            echo "Op te halen tot: ";
-            echo $row['datumhalentot'];
-            echo "<br>";
-            echo "Geplaatst door: ";   
-            echo $row['geplaatstdoor'];
-            echo "<br>";
+            try{
+                $sql = "SELECT * FROM afval WHERE afvalnummer=$afvalnummer";   
+                $result1 = $pdo->query($sql);
+                if($result1->rowCount() > 0){
+                    while($row = $result1->fetch()){
+                        echo "Afvalsoort: ";
+                        echo $row['afvalnaam'];
+                        echo "<br>";
+                        echo "Contactpersoon: ";
+                        echo $row['geplaatstdoor'];
+                        echo "<br>";
+                      }
+              
+                      // Free result set
+                      unset($result1);
+                  } else{
+                      echo 'Niks te vinden';
+                  }
+              } catch(PDOException $e){
+                  die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+              }
 
-            echo '<form class="form" action="" method="POST">';
-            echo '<input type="date" name="datumhalen"
-            min="'. $van . '" max="'. $tot . '">';
-            echo '<input type="time" name="hoelaat"
-            min="09:00" max="18:00" required>';
-            echo '<button type="submit" class="btn" name="ophalen">ophalen</button>';
-            echo '</form>';
+            echo "Datum: ";
+            echo $datumhalen;
+            echo "<br>";;
+            echo "Tijd: ";
+            echo $tijdhalen;
+            echo "<br>";;
 
                      echo  "</p>
                      </div>
