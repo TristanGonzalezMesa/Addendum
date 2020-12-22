@@ -28,7 +28,47 @@ try{
   } catch(PDOException $e){
       die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
   }
+?>
 
+<?php
+
+try{
+    $sql = "SELECT * FROM afval";   
+    $result = $pdo->query($sql);
+    if($result->rowCount() > 0){
+        while($row = $result->fetch()){
+            $klantidgeplaatst = $row['geplaatstdoor'];
+          }
+  
+          // Free result set
+          unset($result);
+      } else{
+          echo 'Kon niet vinden';
+      }
+  } catch(PDOException $e){
+      die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+  }
+
+
+try{
+    $sql = "SELECT * FROM klanten WHERE klantid='$klantidgeplaatst'";   
+    $result = $pdo->query($sql);
+    if($result->rowCount() > 0){
+        while($row = $result->fetch()){
+
+            $plaatsernaam = $row['voornaam'];
+          }
+          
+          // Free result set
+          unset($result);
+      } else{
+          echo 'Ik kan de klant niet vinden!';
+      }
+  } catch(PDOException $e){
+      die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+  }
+  ?>
+  <?php
 
 try{
     $sql = "SELECT * FROM klantafspraakregel WHERE klantid=$klantid";   
@@ -48,7 +88,7 @@ try{
                         echo $row['afvalnaam'];
                         echo "<br>";
                         echo "Contactpersoon: ";
-                        echo $row['geplaatstdoor'];
+                        echo "<a class='' href='./contactpersoondetail.php?id=".$klantidgeplaatst. "  '>" . $plaatsernaam . " </a> "; 
                         echo "<br>";
                       }
               
@@ -77,7 +117,7 @@ try{
           // Free result set
           unset($result);
       } else{
-          echo 'Ik kan de klant niet vinden!';
+          echo 'Je hebt momenteel geen afspraken!';
       }
   } catch(PDOException $e){
       die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
@@ -118,3 +158,5 @@ if ($conn->query($sql) == TRUE) {
   
 
 ?>
+
+<a href="index.php">Homepage</a>

@@ -92,3 +92,5 @@ else
    echo "We nemen contact op!";
 }
 ?>
+
+<a href="index.php">Homepage</a>

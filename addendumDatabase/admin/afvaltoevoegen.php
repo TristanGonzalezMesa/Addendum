@@ -15,7 +15,7 @@ try{
     if($result->rowCount() > 0){
         while($row = $result->fetch()){
 
-            $plaatsertnaam = $row['voornaam'];
+            $plaatsertid = $row['klantid'];
           }
           
           // Free result set
@@ -78,7 +78,7 @@ Vanaf
 
  
 // $sql = "INSERT INTO afspraak (afvalsoort, datumhalenvan, datumhalentot, geplaatstdoor, opgehaalddoor, opgehaald)
-// VALUES ('$Soort', '$datumvan', '$datumtot', '$plaatsertnaam', '$opgehaalddoor', '$opgehaald')";
+// VALUES ('$Soort', '$datumvan', '$datumtot', '$plaatsertid', '$opgehaalddoor', '$opgehaald')";
 
 //  try{
 // $conn->exec($sql);
@@ -107,7 +107,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
  
 $sql = "INSERT INTO afval (afvalomschrijving, prijs, afvalnaam,datumhalenvan, datumhalentot, geplaatstdoor)
-VALUES ('$afvalomscrhijving', '$prijs', '$afvalnaam', '$datumvan', '$datumtot', '$plaatsertnaam')";
+VALUES ('$afvalomscrhijving', '$prijs', '$afvalnaam', '$datumvan', '$datumtot', '$plaatsertid')";
 
  try{
 $conn->exec($sql);

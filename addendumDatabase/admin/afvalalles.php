@@ -10,6 +10,45 @@ $gebruiker = $_SESSION['Email'];
 
 
     <?php
+
+try{
+    $sql = "SELECT * FROM afval";   
+    $result = $pdo->query($sql);
+    if($result->rowCount() > 0){
+        while($row = $result->fetch()){
+            $klantidgeplaatst = $row['geplaatstdoor'];
+          }
+  
+          // Free result set
+          unset($result);
+      } else{
+          echo 'Kon niet vinden';
+      }
+  } catch(PDOException $e){
+      die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+  }
+
+
+try{
+    $sql = "SELECT * FROM klanten WHERE klantid='$klantidgeplaatst'";   
+    $result = $pdo->query($sql);
+    if($result->rowCount() > 0){
+        while($row = $result->fetch()){
+
+            $plaatsernaam = $row['voornaam'];
+          }
+          
+          // Free result set
+          unset($result);
+      } else{
+          echo 'Ik kan de klant niet vinden!';
+      }
+  } catch(PDOException $e){
+      die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
+  }
+  ?>
+
+    <?php
 try{
     $sql = "SELECT * FROM afval";   
     $result = $pdo->query($sql);
@@ -31,7 +70,7 @@ try{
             echo $row['datumhalentot'];
             echo "<br>";
             echo "Geplaatst door: ";   
-            echo $row['geplaatstdoor'];
+            echo $plaatsernaam;
             echo "<br>";
 
             if($row['opgehaald'] == 1){

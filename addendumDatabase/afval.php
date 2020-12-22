@@ -41,3 +41,5 @@ try{
       die('ERROR: Could not able to execute $sql. ' . $e->getMessage());
   }
    ?>
+
+<a href="index.php">Homepage</a>
